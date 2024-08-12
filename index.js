@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
-var methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 const port = 3000;
 
 
@@ -32,6 +33,7 @@ app.set("views" , path.join(__dirname,"views"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.engine('ejs', ejsMate)
 
 app.listen(port, () => {
   console.log(`port is listening on ${port} `);
@@ -67,16 +69,22 @@ app.post("/Listings" , async (req , res) => {
 })
 
 // edite route 
-
 app.get("/Listings/:id/edit" , async (req ,res) =>{
   let {id} = req.params;
   let data = await Listing.findById(id);
   res.render("listings/edit.ejs" , {data})
 });
 
+//update route
 app.put("/Listings/:id" , async (req , res) => {
   let {id} = req.params;
   let update  = await Listing.findByIdAndUpdate(id , {...req.body.listing});
-  res.redirect("/Listings");
+  res.redirect(`/Listings/${id}`);
 });
 
+// delete route 
+app.delete("/Listings/:id" , async (req , res) =>{
+  let {id} = req.params;
+  await Listing.findByIdAndDelete(id);
+  res.redirect("/Listings");
+})
