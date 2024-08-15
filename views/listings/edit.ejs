@@ -5,7 +5,7 @@
       <div class="col-7 offset-2">
 
         <h3 class="head">Edit your Listing</h3>
-        <form action="/Listings/<%= data._id %>?_method=PUT" method="post" class="form">
+        <form action="/Listings/<%= data._id %>?_method=PUT" method="post" class="form needs-validation" novalidate>
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input
@@ -13,34 +13,40 @@
               value="<%= data.title %>"
               name="listing[title]"
               class="form-control"
+              required
             />
           </div>
     
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea type="text" name="listing[description]" class="form-control">
+            <textarea type="text" name="listing[description]" class="form-control" required>
               <%= data.description %>
             </textarea>
+            <div class="invalid-feedback">Enter your short Description</div>
           </div>
     
           <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="image" class="form-label">Image</label>
             <input
               value="<%= data.image %>"
               name="listing[image]"
               class="form-control"
+              required
             />
+            <div class="valid-feedback">Looks Good </div>
           </div>
     
           <div class="row ">
             <div class="mb-3 col-4">
-              <label for="number" class="form-label">Number</label>
+              <label for="number" class="form-label">Price</label>
               <input
                 type="number"
                 value="<%= data.price %>"
                 name="listing[price]"
                 class="form-control"
+                required
               />
+              <div class="invalid-feedback">Price should be valid</div>
             </div>
       
             <div class="mb-3 col-8">
@@ -50,7 +56,9 @@
                 value="<%= data.location %>"
                 name="listing[location]"
                 class="form-control"
+                required
               />
+              <div class="invalid-feedback">Location name should be valid</div>
             </div>
           </div>
           
@@ -62,7 +70,10 @@
               value="<%= data.country %>"
               name="listing[country]"
               class="form-control"
+              required
             />
+            <div class="invalid-feedback">Country name should be valid</div>
+            <div class="valid-feedback">Looks Good </div>
           </div>
     
           <button class="btn add-btn mb-4">Sent data !</button>
@@ -71,6 +82,6 @@
       </div>
     </div>
 
-
+    <script src="/public/javascript/script.js"></script>
   </body>
 

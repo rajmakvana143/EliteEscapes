@@ -1,9 +1,14 @@
 <% layout('/layouts/boilerPlate') %>
 <body>
-  <div class="row ">
+  <div class="row">
     <div class="col-7 offset-2">
-      <h3 class="mb-4 mt-4"> <b> New Listing </b> </h3>
-      <form action="/Listings" method="post" class="form">
+      <h3 class="mb-4 mt-4"><b> New Listing </b></h3>
+      <form
+        action="/Listings"
+        method="post"
+        novalidate
+        class="form needs-validation"
+      >
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input
@@ -11,7 +16,9 @@
             placeholder="Add catchy title"
             name="listing[title]"
             class="form-control"
+            required
           />
+          <div class="valid-feedback">Title looks Good</div>
         </div>
 
         <div class="mb-3">
@@ -21,8 +28,12 @@
             placeholder="enter description"
             name="listing[description]"
             class="form-control"
+            required
           >
           </textarea>
+          <div class="invalid-feedback">
+            Please enter a your short description
+          </div>
         </div>
 
         <div class="mb-3">
@@ -42,7 +53,9 @@
               placeholder="1800"
               name="listing[price]"
               class="form-control"
+              required
             />
+            <div class="invalid-feedback">Price should be valid</div>
           </div>
 
           <div class="mb-3 col-md-8">
@@ -52,7 +65,9 @@
               placeholder="Jaipur , Rajsthan"
               name="listing[location]"
               class="form-control"
+              required
             />
+            <div class="invalid-feedback">Location should be valid</div>
           </div>
         </div>
 
@@ -63,10 +78,11 @@
             placeholder="India"
             name="listing[country]"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Country name should be valid</div>
         </div>
 
-        
         <button class="btn btn-dark mb-5 add-btn col-2">Add List !</button>
       </form>
     </div>
