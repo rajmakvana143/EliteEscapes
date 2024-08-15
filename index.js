@@ -30,6 +30,7 @@ async function main() {
 
 app.set("view engine", "ejs");
 app.set("views" , path.join(__dirname,"views"));
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride('_method'));
@@ -64,6 +65,7 @@ app.get("/Listings/:id" , async (req , res) => {
 // create route 
 app.post("/Listings" , async (req , res) => {
   let newListing = new Listing(req.body.listing);
+  // console.log(req.body);
   await newListing.save();
   res.redirect("/listings");
 })
