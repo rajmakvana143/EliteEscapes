@@ -1,19 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EliteEscapes</title>
-</head>
+<% layout('/layouts/boilerPlate') %>
 <body>
-    <h3> Listing Details</h3>
-    <ul>
-        <li> <%= Listings.title %></li>
-        <li> <%= Listings.description %></li>
-        <li>  &#8377; <%= Listings.price.toLocaleString("en-IN") %></li>
-        <li> <%= Listings.location %></li>
-        <li> <%= Listings.country %></li>
-    </ul>
-    <a href="/Listings/<%= Listings._id %>/edit"> Edite Listing</a>
+  <div class="row offset-2 ">
+
+    <div class="col-8 offset-2 mt-3">
+      <h4> <b> Listing Details </b> </h4>
+    </div>
+
+    <div class="card offset-2 col-5 " >
+      <img
+        src="<%= Listings.image %>"
+        class="card-img-top show-img "
+        alt="Listing image"
+      />
+      <div class="card-body mt-3">
+        <h5 class="card-title"><%= Listings.title %></h5>
+        <p class="card-text">
+          <%= Listings.description %>
+          <br />
+          &#8377; <%= Listings.price.toLocaleString("en-IN") %> <br />
+          <%= Listings.location %> <br />
+          <%= Listings.country %>
+        </p>
+
+        <div class="btns">
+          <a href="/Listings/<%= Listings._id %>/edit" class="btn add-btn col-3 ">
+            Edit</a
+          >
+          <form
+            action="/Listings/<%= Listings._id %>?_method=DELETE"
+            method="post"
+          >
+            <button class="btn btn-dark offset-2">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </body>
-</html>
