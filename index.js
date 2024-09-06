@@ -93,18 +93,14 @@ app.delete("/Listings/:id" , wrapasync(async (req , res) =>{
 }));
 
 
-
-
-
 app.all("*" , (req , res , next) => {
   next(new ExpressError(404, "Page Not Found"));
 });
 
 app.use((err, req , res , next) => {
   let {statusCode=500 , message="somthin went wrong"} = err;
-  res.status(statusCode).send(message);
-  res.send('Somthing went wrong');
-})
+  res.render("error.ejs");
+});
 
 // server response
 app.listen(port, () => {
